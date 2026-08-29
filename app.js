@@ -779,3 +779,108 @@ function escapeHTML(text) {
 // ==========================================
 
 renderCalendar();
+// ==========================================
+// RANDOM HAPPY MEMORY
+// ==========================================
+
+const randomMemoryBtn =
+    document.getElementById("randomMemoryBtn");
+
+const memoryPopup =
+    document.getElementById("memoryPopup");
+
+const closeMemoryPopup =
+    document.getElementById("closeMemoryPopup");
+
+const randomMemoryText =
+    document.getElementById("randomMemoryText");
+
+const randomMemoryDate =
+    document.getElementById("randomMemoryDate");
+
+
+// ==========================================
+// RANDOM MEMORY BUTTON
+// ==========================================
+
+randomMemoryBtn.addEventListener(
+    "click",
+    function() {
+
+        // Check if there are any memories
+        if (memories.length === 0) {
+
+            alert(
+                "You don't have any saved happy memories yet!"
+            );
+
+            return;
+        }
+
+
+        // Pick a random memory
+        const randomIndex =
+            Math.floor(
+                Math.random() * memories.length
+            );
+
+        const randomMemory =
+            memories[randomIndex];
+
+
+        // Show the memory
+        randomMemoryText.textContent =
+            randomMemory.text;
+
+
+        // Format the memory date
+        const memoryDateObject =
+            new Date(
+                randomMemory.date + "T00:00:00"
+            );
+
+
+        randomMemoryDate.textContent =
+            memoryDateObject.toLocaleDateString(
+                "en-US",
+                {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+
+        // Show popup
+        memoryPopup.classList.remove("hidden");
+    }
+);
+
+
+// ==========================================
+// CLOSE RANDOM MEMORY POPUP
+// ==========================================
+
+closeMemoryPopup.addEventListener(
+    "click",
+    function() {
+
+        memoryPopup.classList.add("hidden");
+    }
+);
+
+
+// ==========================================
+// CLICK OUTSIDE RANDOM MEMORY POPUP
+// ==========================================
+
+memoryPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === memoryPopup) {
+
+            memoryPopup.classList.add("hidden");
+        }
+    }
+);

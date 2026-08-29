@@ -259,3 +259,188 @@ body {
 .today {
     background: #e96b79;
 }
+/* =========================================
+   HAPPY MEMORY BUTTON
+========================================= */
+
+.memory-btn {
+    border: none;
+
+    background: #a94f7d;
+    color: #fff5ed;
+
+    padding: 13px 20px;
+
+    margin-left: 8px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 5px 15px rgba(169, 79, 125, 0.25);
+}
+
+.memory-btn:hover {
+    background: #873f6f;
+
+    transform: translateY(-2px);
+}
+
+.memory-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   RANDOM MEMORY POPUP
+========================================= */
+
+.memory-popup {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(59, 24, 48, 0.7);
+
+    backdrop-filter: blur(5px);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 2000;
+}
+
+
+/* Hidden */
+
+.memory-popup.hidden {
+    display: none;
+}
+
+
+/* =========================================
+   MEMORY POPUP CONTENT
+========================================= */
+
+.memory-popup-content {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 35px;
+
+    background: #ffd0b5;
+
+    color: #4a2035;
+
+    border: 2px solid #d85a72;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    position: relative;
+
+    box-shadow:
+        0 25px 60px rgba(103, 38, 64, 0.4);
+
+    animation: memoryPopupOpen 0.25s ease;
+}
+
+
+/* =========================================
+   POPUP ANIMATION
+========================================= */
+
+@keyframes memoryPopupOpen {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   MEMORY TITLE
+========================================= */
+
+.memory-popup-content h2 {
+    color: #8e416d;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+}
+
+
+/* =========================================
+   RANDOM MEMORY
+========================================= */
+
+#randomMemoryText {
+    font-size: 20px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    color: #4a2035;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   MEMORY DATE
+========================================= */
+
+#randomMemoryDate {
+    font-size: 14px;
+
+    color: #a85d70;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .memory-btn {
+        display: block;
+
+        margin-left: 0;
+
+        margin-top: 8px;
+
+        padding: 10px 13px;
+
+        font-size: 13px;
+    }
+
+    .memory-popup-content {
+        padding: 28px 20px;
+    }
+
+    #randomMemoryText {
+        font-size: 18px;
+    }
+
+}

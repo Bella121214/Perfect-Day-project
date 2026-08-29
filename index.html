@@ -1,75 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Calendar</title>
 
-    <title>My Calendar</title>
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css">
-</head>
+</head> <body>
+<div class="app">
 
-<body>
+    <!-- ================================
+         TOP BAR
+    ================================= -->
 
-    <div class="app">
+    <header class="top-bar">
 
-        <header class="top-bar">
-            <h1>My Calendar</h1>
+        <h1>My Calendar</h1>
+
+        <div class="top-buttons">
 
             <button id="addItemBtn" class="add-btn">
                 + Add Item
             </button>
-        </header>
 
-        <section class="calendar-header">
-
-            <button id="previousMonth" class="nav-btn">
-                ‹
+            <button id="randomMemoryBtn" class="memory-btn">
+                ♥ Surprise Me
             </button>
 
-            <h2 id="monthYear"></h2>
+        </div>
 
-            <button id="nextMonth" class="nav-btn">
-                ›
-            </button>
-
-        </section>
-
-        <section class="calendar">
-
-            <div class="weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
-
-            <div id="calendarDays" class="calendar-days"></div>
-
-        </section>
-
-    </div>
+    </header>
 
 
-    <!-- =========================================
-         POPUP
-    ========================================== -->
+    <!-- ================================
+         CALENDAR HEADER
+    ================================= -->
 
-    <div id="modal" class="modal hidden">
+    <section class="calendar-header">
 
-        <div class="modal-content">
+        <button id="previousMonth" class="nav-btn">
+            ‹
+        </button>
 
-            <button id="closeModal" class="close-btn">
-                ×
-            </button>
+        <h2 id="monthYear"></h2>
+
+        <button id="nextMonth" class="nav-btn">
+            ›
+        </button>
+
+    </section>
 
 
-            <!-- =================================
-                 ADD CALENDAR ITEM
-            ================================== -->
+    <!-- ================================
+         CALENDAR
+    ================================= -->
+
+    <section class="calendar">
+
+        <div class="weekdays">
+
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+        </div>
+
+        <div
+            id="calendarDays"
+            class="calendar-days">
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================
+     MAIN POPUP / MODAL
+========================================== -->
+
+<div id="modal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <button
+            id="closeModal"
+            class="close-btn"
+            type="button">
+            ×
+        </button>
+
+
+        <!-- =================================
+             ADD CALENDAR ITEM
+        ================================== -->
+
+        <div id="itemSection">
 
             <h2>Add Calendar Item</h2>
 
@@ -120,63 +147,100 @@
                 >
 
 
-                <button type="submit" class="save-btn">
+                <button
+                    type="submit"
+                    class="save-btn">
                     Save Item
                 </button>
 
             </form>
 
-
-            <!-- =================================
-                 HAPPY MEMORIES
-            ================================== -->
-
-           <!-- =================================
-     HAPPY MEMORIES
-================================== -->
-
-<div class="happy-memories">
-
-    <h2>Happy Memories</h2>
-
-    <form id="memoryForm">
-
-        <label for="memoryText">
-            Memory
-        </label>
-
-        <input
-            type="text"
-            id="memoryText"
-            placeholder="What made you happy today?"
-            required
-        >
+        </div>
 
 
-        <label for="memoryDate">
-            Date
-        </label>
+        <!-- =================================
+             HAPPY MEMORIES
+        ================================== -->
 
-        <input
-            type="date"
-            id="memoryDate"
-            required
-        >
+        <div class="happy-memories">
+
+            <h2>Happy Memories</h2>
+
+            <form id="memoryForm">
+
+                <label for="memoryText">
+                    Memory
+                </label>
+
+                <input
+                    type="text"
+                    id="memoryText"
+                    placeholder="What made you happy today?"
+                    required
+                >
 
 
-        <button
-            type="submit"
-            class="save-btn"
-        >
-            Save Memory
-        </button>
+                <label for="memoryDate">
+                    Date
+                </label>
 
-    </form>
+                <input
+                    type="date"
+                    id="memoryDate"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="save-btn">
+                    Save Memory
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================
+             SURPRISE ME MEMORY DISPLAY
+        ================================== -->
+
+        <div
+            id="surpriseMemory"
+            class="surprise-memory hidden">
+
+            <div class="surprise-heart">
+                ♥
+            </div>
+
+            <h2>A Happy Memory</h2>
+
+            <p id="surpriseMemoryText"></p>
+
+            <p
+                id="surpriseMemoryDate"
+                class="surprise-memory-date">
+            </p>
+
+            <button
+                id="anotherMemoryBtn"
+                class="save-btn"
+                type="button">
+                ♥ Another Memory
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-    <script src="app.js"></script>
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
 
-</body>
-</html>
+<script src="app.js"></script>
+
+</body> </html>
