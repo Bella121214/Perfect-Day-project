@@ -1,37 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Perfect Day Calendar</title>
-    <!-- Links to your CSS file -->
     <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,
+        FILL,GRAD@20..48,100..700,0..1,-50..200">
+    </head>
+
 <body>
+    <div class="calendar-container">
+        <header class="calendar-header">
+            <p class="calendar-current-date"></p>
+            <div class="calendar-navigation">
+                <span id="calendar-prev" 
+                      class="material-symbols-rounded">
+                    chevron_left
+                </span>
+                <span id="calendar-next" 
+                      class="material-symbols-rounded">
+                    chevron_right
+                </span>
+            </div>
+        </header>
 
-    <header>
-        <h1>☀️ My Perfect Day Calendar</h1>
-    </header>
-
-    <!-- Main Container for just the Calendar Planner -->
-    <main class="planner-section" style="max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
-        <h2>📅 Core: Day Planner</h2>
-       
-        <!-- The form where you type new activities -->
-        <form id="activity-form">
-            <input type="time" id="activity-time" required>
-            <input type="text" id="activity-text" placeholder="What is your perfect activity?" required>
-            <button type="submit">Add to Day</button>
-        </form>
-       
-        <!-- This is where your planned activities will appear -->
-        <div id="timeline" class="timeline-container">
-            <!-- Temporary text so you know it's ready -->
-            <p style="color: #666; font-style: italic; margin-top: 20px;">Your timeline is empty. Add an activity above!</p>
+        <div class="calendar-body">
+            <ul class="calendar-weekdays">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+            </ul>
+            <ul class="calendar-dates"></ul>
         </div>
-    </main>
+    </div>
+    <script src="script.js"></script>
 
-    <!-- Links to your JavaScript file to make the buttons work -->
-    <script src="app.js"></script>
 </body>
 </html>
