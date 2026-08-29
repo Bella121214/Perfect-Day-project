@@ -1,89 +1,29 @@
-let date = new Date();
-let year = date.getFullYear();
-let month = date.getMonth();
+// 1. Grab the elements from our HTML page
+const activityForm = document.getElementById('activity-form');
+const activityTime = document.getElementById('activity-time');
+const activityText = document.getElementById('activity-text');
+const timeline = document.getElementById('timeline');
 
-const day = document.querySelector(".calendar-dates");
-const currdate = document.querySelector(".calendar-current-date");
-const prenexIcons = document.querySelectorAll(".calendar-navigation span");
+// 2. Listen for when the user clicks the "Add to Day" button
+activityForm.addEventListener('submit', function(event) {
+   
+    // Stop the web page from automatically refreshing
+    event.preventDefault();
 
-const months = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+    // Get the specific time and text the user typed in
+    const timeValue = activityTime.value;
+    const textValue = activityText.value;
 
-let clickedDay = null;
-let selectedDayElement = null;
+    // 3. Create a brand new visual box for the activity
+    const activityCard = document.createElement('div');
+    activityCard.className = 'activity-item';
+   
+    // Put the time in bold, followed by the activity text
+    activityCard.innerHTML = `<strong>${timeValue}</strong> - ${textValue}`;
 
-const manipulate = () => {
-  let dayone = new Date(year, month, 1).getDay();
-  let lastdate = new Date(year, month + 1, 0).getDate();
-  let dayend = new Date(year, month, lastdate).getDay();
-  let monthlastdate = new Date(year, month, 0).getDate();
+    // 4. Add this new box into our timeline area on the screen
+    timeline.appendChild(activityCard);
 
-  let lit = "";
-
-  for (let i = dayone; i > 0; i--) {
-    lit += `<li class="inactive">${monthlastdate - i + 1}</li>`;
-  }
-
-  
-  for (let i = 1; i <= lastdate; i++) {
-    let isToday = (i === date.getDate()
-      && month === new Date().getMonth()
-      && year === new Date().getFullYear()) ? "active" : "";
-
-    let highlightClass = (clickedDay === i) ? "highlight" : "";
-
-    lit += `<li class="${isToday} ${highlightClass}" data-day="${i}">${i}</li>`;
-  }
-
-
-  for (let i = dayend; i < 6; i++) {
-    lit += `<li class="inactive">${i - dayend + 1}</li>`;
-  }
-
-  currdate.innerText = `${months[month]} ${year}`;
-  day.innerHTML = lit;
-
-  addClickListenersToDays();
-};
-
-
-function addClickListenersToDays() {
-  const allDays = day.querySelectorAll('li:not(.inactive)');
-  allDays.forEach(li => {
-    li.addEventListener('click', () => {
-      if (selectedDayElement) {
-        selectedDayElement.classList.remove('highlight');
-      }
-
-      li.classList.add('highlight');
-      selectedDayElement = li;
-
-      clickedDay = parseInt(li.getAttribute('data-day'));
-
-      console.log('Clicked day:', clickedDay);
-    });
-  });
-}
-
-manipulate();
-
-prenexIcons.forEach(icon => {
-  icon.addEventListener("click", () => {
-    month = icon.id === "calendar-prev" ? month - 1 : month + 1;
-
-    if (month < 0 || month > 11) {
-      date = new Date(year, month, new Date().getDate());
-      year = date.getFullYear();
-      month = date.getMonth();
-    } else {
-      date = new Date();
-    }
-
-    clickedDay = null;
-    selectedDayElement = null;
-
-    manipulate();
-  });
+    // 5. Clear out the text box so it's fresh and ready for the next entry
+    activityText.value = '';
 });
