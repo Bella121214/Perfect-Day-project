@@ -1,23 +1,59 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Perfect Day Dashboard</title>
+    <!-- This links your HTML to your style.css file -->
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-        <header></header>
 
-        <main>
-            <h1> Perfect Day Dashboard </h1>
-            <h2> Core day planner</h2>
+    <header>
+        <h1>☀️ My Perfect Day Dashboard</h1>
+    </header>
 
-        <div>
+    <!-- This container holds both the main planner and the sidebar -->
+    <div class="dashboard-container">
+       
+        <!-- 📅 MAIN CORE: THE TIMELINE PLANNER -->
+        <main class="planner-section">
+            <h2>📅 Core: Day Planner</h2>
+                  <!-- The form where you type new activities -->
+            <form id="activity-form">
+                <input type="time" id="activity-time" required>
+                <input type="text" id="activity-text" placeholder="What is your perfect activity?" required>
+                <button type="submit">Add to Day</button>
+            </form>
+           
+            <!-- This is where our planned activities will appear -->
+            <div id="timeline" class="timeline-container">
+                <!-- Temporary text just so you can see it working -->
+                <p style="color: #666; font-style: italic;">Your timeline is empty. Add an activity above!</p>
+            </div>
+        </main>
 
+        <!-- 🏢 SIDEBAR: THE BONUS FEATURES -->
+        <aside class="sidebar">
+           
+                            </section>
 
+            <!-- 📝 BONUS 2: MEMORY JOURNAL -->
+            <section class="journal-card">
+                <h3>📝 Bonus 2: Happiness Journal</h3>
+                <p>What went right today?</p>
+                <textarea id="journal-input" placeholder="Type a happy memory here..."></textarea>
+                <button id="save-journal-btn">Save Memory</button>
+               
+                <!-- This is where saved journal entries will show up -->
+                <div id="saved-memories"></div>
+            </section>
 
-</div>
+        </aside>
 
-     </main>
+    </div>
+
+    <!-- This links your HTML to your app.js file -->
+    <script src="app.js"></script>
+</body>
+</html>
