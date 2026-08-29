@@ -31,7 +31,12 @@ const itemColor = document.getElementById("itemColor");
 // ==========================================
 
 const memoryForm = document.getElementById("memoryForm");
-const memoryText = document.getElementById("memoryText");
+
+const memoryText =
+    document.getElementById("memoryText");
+
+const memoryDate =
+    document.getElementById("memoryDate");
 
 
 // ==========================================
@@ -40,8 +45,11 @@ const memoryText = document.getElementById("memoryText");
 
 let currentDate = new Date();
 
-let currentMonth = currentDate.getMonth();
-let currentYear = currentDate.getFullYear();
+let currentMonth =
+    currentDate.getMonth();
+
+let currentYear =
+    currentDate.getFullYear();
 
 
 // ==========================================
@@ -49,7 +57,9 @@ let currentYear = currentDate.getFullYear();
 // ==========================================
 
 let items =
-    JSON.parse(localStorage.getItem("calendarItems")) || [];
+    JSON.parse(
+        localStorage.getItem("calendarItems")
+    ) || [];
 
 
 // ==========================================
@@ -57,7 +67,9 @@ let items =
 // ==========================================
 
 let memories =
-    JSON.parse(localStorage.getItem("happyMemories")) || [];
+    JSON.parse(
+        localStorage.getItem("happyMemories")
+    ) || [];
 
 
 // ==========================================
@@ -123,7 +135,11 @@ function renderCalendar() {
     // PREVIOUS MONTH DAYS
     // ==========================================
 
-    for (let i = firstDay - 1; i >= 0; i--) {
+    for (
+        let i = firstDay - 1;
+        i >= 0;
+        i--
+    ) {
 
         const dayNumber =
             daysInPreviousMonth - i;
@@ -143,7 +159,11 @@ function renderCalendar() {
     // CURRENT MONTH DAYS
     // ==========================================
 
-    for (let day = 1; day <= daysInMonth; day++) {
+    for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ) {
 
         const date =
             new Date(
@@ -166,7 +186,11 @@ function renderCalendar() {
     const remaining =
         42 - totalCells;
 
-    for (let day = 1; day <= remaining; day++) {
+    for (
+        let day = 1;
+        day <= remaining;
+        day++
+    ) {
 
         const date =
             new Date(
@@ -242,11 +266,13 @@ function createDay(date, otherMonth) {
 
     const dayItems =
         items
-            .filter(item =>
-                item.date === dateString
+            .filter(
+                item =>
+                    item.date === dateString
             )
-            .sort((a, b) =>
-                a.time.localeCompare(b.time)
+            .sort(
+                (a, b) =>
+                    a.time.localeCompare(b.time)
             );
 
 
@@ -268,7 +294,6 @@ function createDay(date, otherMonth) {
             item.color;
 
 
-        // Convert time to readable format
         const readableTime =
             formatTime(item.time);
 
@@ -291,6 +316,7 @@ function createDay(date, otherMonth) {
 
                 event.stopPropagation();
 
+
                 const deleteItem =
                     confirm(
                         `Delete "${item.title}"?`
@@ -305,7 +331,6 @@ function createDay(date, otherMonth) {
                                 savedItem.id !== item.id
                         );
 
-
                     saveItems();
 
                     renderCalendar();
@@ -319,7 +344,7 @@ function createDay(date, otherMonth) {
 
 
     // ==========================================
-    // FIND HAPPY MEMORIES
+    // FIND HAPPY MEMORIES FOR THIS DATE
     // ==========================================
 
     const dayMemories =
@@ -338,13 +363,14 @@ function createDay(date, otherMonth) {
         const memoryElement =
             document.createElement("div");
 
+
         memoryElement.classList.add(
             "calendar-item",
             "memory-item"
         );
 
 
-        // Sunset memory color
+        // Sunset color for memories
         memoryElement.style.backgroundColor =
             "#d85a72";
 
@@ -367,6 +393,7 @@ function createDay(date, otherMonth) {
 
                 event.stopPropagation();
 
+
                 const deleteMemory =
                     confirm(
                         `Delete this happy memory?\n\n"${memory.text}"`
@@ -381,7 +408,6 @@ function createDay(date, otherMonth) {
                                 savedMemory.id !== memory.id
                         );
 
-
                     saveMemories();
 
                     renderCalendar();
@@ -390,6 +416,7 @@ function createDay(date, otherMonth) {
         );
 
 
+        // Add memory AFTER all events
         day.appendChild(memoryElement);
     });
 
@@ -421,12 +448,14 @@ function formatDate(date) {
         date.getFullYear();
 
     const month =
-        String(date.getMonth() + 1)
-            .padStart(2, "0");
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
 
     const day =
-        String(date.getDate())
-            .padStart(2, "0");
+        String(
+            date.getDate()
+        ).padStart(2, "0");
 
     return `${year}-${month}-${day}`;
 }
@@ -467,8 +496,11 @@ function openModal(date = "") {
 
     if (date) {
 
-        itemDate.value =
-            date;
+        // Set event date
+        itemDate.value = date;
+
+        // Set memory date too
+        memoryDate.value = date;
     }
 
 
@@ -485,19 +517,17 @@ function closeModalWindow() {
     modal.classList.add("hidden");
 
 
-    // Reset calendar event form
+    // Reset calendar item form
     itemForm.reset();
 
 
-    // Reset color
+    // Reset calendar color
     itemColor.value =
         "#f4515f";
 
 
     // Reset memory form
-    if (memoryForm) {
-        memoryForm.reset();
-    }
+    memoryForm.reset();
 }
 
 
@@ -573,19 +603,15 @@ itemForm.addEventListener(
         };
 
 
-        // Add calendar event
         items.push(newItem);
 
 
-        // Save event
         saveItems();
 
 
-        // Close popup
         closeModalWindow();
 
 
-        // Refresh calendar
         renderCalendar();
     }
 );
@@ -602,12 +628,23 @@ memoryForm.addEventListener(
         event.preventDefault();
 
 
-        // Make sure the calendar event date
-        // is used for the memory as well.
-        const memoryDate =
-            itemDate.value ||
-            formatDate(new Date());
+        // Make sure both fields are filled
+        if (
+            memoryText.value.trim() === "" ||
+            memoryDate.value === ""
+        ) {
 
+            alert(
+                "Please enter a memory and choose a date."
+            );
+
+            return;
+        }
+
+
+        // ======================================
+        // CREATE MEMORY
+        // ======================================
 
         const newMemory = {
 
@@ -618,23 +655,30 @@ memoryForm.addEventListener(
                 memoryText.value.trim(),
 
             date:
-                memoryDate
+                memoryDate.value
         };
 
 
-        // Add memory
+        // ======================================
+        // SAVE MEMORY
+        // ======================================
+
         memories.push(newMemory);
 
-
-        // Save memory
         saveMemories();
 
 
-        // Clear only the memory input
-        memoryText.value = "";
+        // ======================================
+        // CLOSE MODAL
+        // ======================================
+
+        closeModalWindow();
 
 
-        // Refresh calendar
+        // ======================================
+        // REFRESH CALENDAR
+        // ======================================
+
         renderCalendar();
     }
 );
@@ -716,7 +760,6 @@ nextMonth.addEventListener(
 
 // ==========================================
 // SECURITY
-// Prevent HTML being inserted
 // ==========================================
 
 function escapeHTML(text) {
