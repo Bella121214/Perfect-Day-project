@@ -242,13 +242,13 @@ body {
 /* Previous/Next Month */
 
 .other-month {
-    background: #1b2431;
+    background: #277ef8;
 
-    color: #4b5563;
+    color: #11d828;
 }
 
 .other-month .day-number {
-    color: #6b7280;
+    color: #ef0a0a;
 }
 
 
@@ -257,5 +257,5 @@ body {
 ========================================= */
 
 .today {
-    background :#202
+    background :rgb(233, 9, 233)
 }
