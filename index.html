@@ -54,7 +54,9 @@
     </div>
 
 
-    <!-- Add Item Window -->
+    <!-- =========================================
+         POPUP
+    ========================================== -->
 
     <div id="modal" class="modal hidden">
 
@@ -63,6 +65,11 @@
             <button id="closeModal" class="close-btn">
                 ×
             </button>
+
+
+            <!-- =================================
+                 ADD CALENDAR ITEM
+            ================================== -->
 
             <h2>Add Calendar Item</h2>
 
@@ -109,7 +116,7 @@
                 <input
                     type="color"
                     id="itemColor"
-                    value="#4f46e5"
+                    value="#f4515f"
                 >
 
 
@@ -119,41 +126,44 @@
 
             </form>
 
+
+            <!-- =================================
+                 HAPPY MEMORIES
+            ================================== -->
+
+            <div class="happy-memories">
+
+                <h2>Happy Memories</h2>
+
+                <form id="memoryForm">
+
+                    <label for="memoryText">
+                        Memory
+                    </label>
+
+                    <input
+                        type="text"
+                        id="memoryText"
+                        placeholder="What made you happy today?"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Memory
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
 
     </div>
 
-<div id="modal" class="modal hidden">
 
-        <div class="modal-content">
-
-            <button id="closeModal" class="close-btn">
-                ×
-            </button>
-
-            <h3>Happy Memories</h3>
-
-            <form id="itemForm">
-
-                <label for="itemTitle">
-                    Item
-                </label>
-
-                <input
-                    type="text"
-                    id="itemTitle"
-                    placeholder="What made you happy today?"
-                    required
-                >
-                <button type="submit" class="save-btn">
-                    Save Item
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
     <script src="app.js"></script>
 
 </body>
