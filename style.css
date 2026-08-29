@@ -10,7 +10,7 @@
 
 body {
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: #ffd04d;
+    background: #f3c33f;
     color: #000000;
     min-height: 100vh;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 .add-btn:hover {
-    background: #752704;
+    background: #4585dd;
     transform: translateY(-2px);
 }
 
@@ -131,7 +131,7 @@ body {
 ========================================= */
 
 .calendar {
-    background: #507804;
+    background: #93c4382b;
 
     border: 1px solid #374151;
 
@@ -205,7 +205,7 @@ body {
 }
 
 .day:hover {
-    background: #004831;
+    background: #78dabb;
 }
 
 
