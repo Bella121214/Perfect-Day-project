@@ -13,12 +13,25 @@ const addItemBtn = document.getElementById("addItemBtn");
 const modal = document.getElementById("modal");
 const closeModal = document.getElementById("closeModal");
 
+
+// ==========================================
+// CALENDAR ITEM ELEMENTS
+// ==========================================
+
 const itemForm = document.getElementById("itemForm");
 
 const itemTitle = document.getElementById("itemTitle");
 const itemDate = document.getElementById("itemDate");
 const itemTime = document.getElementById("itemTime");
 const itemColor = document.getElementById("itemColor");
+
+
+// ==========================================
+// HAPPY MEMORY ELEMENTS
+// ==========================================
+
+const memoryForm = document.getElementById("memoryForm");
+const memoryText = document.getElementById("memoryText");
 
 
 // ==========================================
@@ -32,10 +45,19 @@ let currentYear = currentDate.getFullYear();
 
 
 // ==========================================
-// LOAD SAVED ITEMS
+// LOAD SAVED CALENDAR ITEMS
 // ==========================================
 
-let items = JSON.parse(localStorage.getItem("calendarItems")) || [];
+let items =
+    JSON.parse(localStorage.getItem("calendarItems")) || [];
+
+
+// ==========================================
+// LOAD SAVED HAPPY MEMORIES
+// ==========================================
+
+let memories =
+    JSON.parse(localStorage.getItem("happyMemories")) || [];
 
 
 // ==========================================
@@ -72,17 +94,29 @@ function renderCalendar() {
 
     // First day of the month
     const firstDay =
-        new Date(currentYear, currentMonth, 1).getDay();
+        new Date(
+            currentYear,
+            currentMonth,
+            1
+        ).getDay();
 
 
     // Number of days in current month
     const daysInMonth =
-        new Date(currentYear, currentMonth + 1, 0).getDate();
+        new Date(
+            currentYear,
+            currentMonth + 1,
+            0
+        ).getDate();
 
 
     // Number of days in previous month
     const daysInPreviousMonth =
-        new Date(currentYear, currentMonth, 0).getDate();
+        new Date(
+            currentYear,
+            currentMonth,
+            0
+        ).getDate();
 
 
     // ==========================================
@@ -94,11 +128,12 @@ function renderCalendar() {
         const dayNumber =
             daysInPreviousMonth - i;
 
-        const date = new Date(
-            currentYear,
-            currentMonth - 1,
-            dayNumber
-        );
+        const date =
+            new Date(
+                currentYear,
+                currentMonth - 1,
+                dayNumber
+            );
 
         createDay(date, true);
     }
@@ -110,11 +145,12 @@ function renderCalendar() {
 
     for (let day = 1; day <= daysInMonth; day++) {
 
-        const date = new Date(
-            currentYear,
-            currentMonth,
-            day
-        );
+        const date =
+            new Date(
+                currentYear,
+                currentMonth,
+                day
+            );
 
         createDay(date, false);
     }
@@ -132,11 +168,12 @@ function renderCalendar() {
 
     for (let day = 1; day <= remaining; day++) {
 
-        const date = new Date(
-            currentYear,
-            currentMonth + 1,
-            day
-        );
+        const date =
+            new Date(
+                currentYear,
+                currentMonth + 1,
+                day
+            );
 
         createDay(date, true);
     }
@@ -149,16 +186,21 @@ function renderCalendar() {
 
 function createDay(date, otherMonth) {
 
-    const day = document.createElement("div");
+    const day =
+        document.createElement("div");
 
     day.classList.add("day");
+
 
     if (otherMonth) {
         day.classList.add("other-month");
     }
 
 
-    // Today's date
+    // ==========================================
+    // TODAY
+    // ==========================================
+
     const today = new Date();
 
     if (
@@ -166,41 +208,61 @@ function createDay(date, otherMonth) {
         date.getMonth() === today.getMonth() &&
         date.getFullYear() === today.getFullYear()
     ) {
+
         day.classList.add("today");
     }
 
 
-    // Day number
-    const number = document.createElement("div");
+    // ==========================================
+    // DAY NUMBER
+    // ==========================================
+
+    const number =
+        document.createElement("div");
 
     number.classList.add("day-number");
 
-    number.textContent = date.getDate();
+    number.textContent =
+        date.getDate();
 
     day.appendChild(number);
 
 
-    // Format date as YYYY-MM-DD
+    // ==========================================
+    // DATE STRING
+    // ==========================================
+
     const dateString =
         formatDate(date);
 
 
-    // Find items for this day
+    // ==========================================
+    // FIND CALENDAR EVENTS
+    // ==========================================
+
     const dayItems =
         items
-            .filter(item => item.date === dateString)
+            .filter(item =>
+                item.date === dateString
+            )
             .sort((a, b) =>
                 a.time.localeCompare(b.time)
             );
 
 
-    // Add items
+    // ==========================================
+    // DISPLAY CALENDAR EVENTS FIRST
+    // ==========================================
+
     dayItems.forEach(item => {
 
         const itemElement =
             document.createElement("div");
 
-        itemElement.classList.add("calendar-item");
+        itemElement.classList.add(
+            "calendar-item"
+        );
+
 
         itemElement.style.backgroundColor =
             item.color;
@@ -219,40 +281,130 @@ function createDay(date, otherMonth) {
         `;
 
 
-        // Click an item to delete it
-        itemElement.addEventListener("click", function(event) {
+        // ======================================
+        // DELETE CALENDAR EVENT
+        // ======================================
 
-            event.stopPropagation();
+        itemElement.addEventListener(
+            "click",
+            function(event) {
 
-            const deleteItem =
-                confirm(
-                    `Delete "${item.title}"?`
-                );
+                event.stopPropagation();
 
-            if (deleteItem) {
-
-                items =
-                    items.filter(
-                        savedItem =>
-                            savedItem.id !== item.id
+                const deleteItem =
+                    confirm(
+                        `Delete "${item.title}"?`
                     );
 
-                saveItems();
 
-                renderCalendar();
+                if (deleteItem) {
+
+                    items =
+                        items.filter(
+                            savedItem =>
+                                savedItem.id !== item.id
+                        );
+
+
+                    saveItems();
+
+                    renderCalendar();
+                }
             }
-        });
+        );
 
 
         day.appendChild(itemElement);
     });
 
 
-    // Clicking a day opens the add window
-    day.addEventListener("click", function() {
+    // ==========================================
+    // FIND HAPPY MEMORIES
+    // ==========================================
 
-        openModal(dateString);
+    const dayMemories =
+        memories.filter(
+            memory =>
+                memory.date === dateString
+        );
+
+
+    // ==========================================
+    // DISPLAY MEMORIES AFTER ALL EVENTS
+    // ==========================================
+
+    dayMemories.forEach(memory => {
+
+        const memoryElement =
+            document.createElement("div");
+
+        memoryElement.classList.add(
+            "calendar-item",
+            "memory-item"
+        );
+
+
+        // Sunset memory color
+        memoryElement.style.backgroundColor =
+            "#d85a72";
+
+
+        memoryElement.innerHTML = `
+            <span class="item-time">
+                ♥
+            </span>
+            ${escapeHTML(memory.text)}
+        `;
+
+
+        // ======================================
+        // DELETE HAPPY MEMORY
+        // ======================================
+
+        memoryElement.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                const deleteMemory =
+                    confirm(
+                        `Delete this happy memory?\n\n"${memory.text}"`
+                    );
+
+
+                if (deleteMemory) {
+
+                    memories =
+                        memories.filter(
+                            savedMemory =>
+                                savedMemory.id !== memory.id
+                        );
+
+
+                    saveMemories();
+
+                    renderCalendar();
+                }
+            }
+        );
+
+
+        day.appendChild(memoryElement);
     });
+
+
+    // ==========================================
+    // CLICK DAY TO OPEN MODAL
+    // ==========================================
+
+    day.addEventListener(
+        "click",
+        function() {
+
+            openModal(dateString);
+        }
+    );
 
 
     calendarDays.appendChild(day);
@@ -293,7 +445,9 @@ function formatTime(time) {
         parseInt(hours);
 
     const ampm =
-        hour >= 12 ? "PM" : "AM";
+        hour >= 12
+            ? "PM"
+            : "AM";
 
     hour =
         hour % 12 || 12;
@@ -310,9 +464,13 @@ function openModal(date = "") {
 
     modal.classList.remove("hidden");
 
+
     if (date) {
-        itemDate.value = date;
+
+        itemDate.value =
+            date;
     }
+
 
     itemTitle.focus();
 }
@@ -326,9 +484,20 @@ function closeModalWindow() {
 
     modal.classList.add("hidden");
 
+
+    // Reset calendar event form
     itemForm.reset();
 
-    itemColor.value = "#4f46e5";
+
+    // Reset color
+    itemColor.value =
+        "#f4515f";
+
+
+    // Reset memory form
+    if (memoryForm) {
+        memoryForm.reset();
+    }
 }
 
 
@@ -336,13 +505,16 @@ function closeModalWindow() {
 // ADD ITEM BUTTON
 // ==========================================
 
-addItemBtn.addEventListener("click", function() {
+addItemBtn.addEventListener(
+    "click",
+    function() {
 
-    const today =
-        formatDate(new Date());
+        const today =
+            formatDate(new Date());
 
-    openModal(today);
-});
+        openModal(today);
+    }
+);
 
 
 // ==========================================
@@ -359,61 +531,117 @@ closeModal.addEventListener(
 // CLICK OUTSIDE MODAL
 // ==========================================
 
-modal.addEventListener("click", function(event) {
+modal.addEventListener(
+    "click",
+    function(event) {
 
-    if (event.target === modal) {
-        closeModalWindow();
+        if (event.target === modal) {
+
+            closeModalWindow();
+        }
     }
-});
+);
 
 
 // ==========================================
-// SAVE ITEM
+// SAVE CALENDAR ITEM
 // ==========================================
 
-itemForm.addEventListener("submit", function(event) {
+itemForm.addEventListener(
+    "submit",
+    function(event) {
 
-    event.preventDefault();
-
-
-    const newItem = {
-
-        id:
-            Date.now(),
-
-        title:
-            itemTitle.value.trim(),
-
-        date:
-            itemDate.value,
-
-        time:
-            itemTime.value,
-
-        color:
-            itemColor.value
-    };
+        event.preventDefault();
 
 
-    // Add to list
-    items.push(newItem);
+        const newItem = {
+
+            id:
+                Date.now(),
+
+            title:
+                itemTitle.value.trim(),
+
+            date:
+                itemDate.value,
+
+            time:
+                itemTime.value,
+
+            color:
+                itemColor.value
+        };
 
 
-    // Save to browser
-    saveItems();
+        // Add calendar event
+        items.push(newItem);
 
 
-    // Close window
-    closeModalWindow();
+        // Save event
+        saveItems();
 
 
-    // Refresh calendar
-    renderCalendar();
-});
+        // Close popup
+        closeModalWindow();
+
+
+        // Refresh calendar
+        renderCalendar();
+    }
+);
 
 
 // ==========================================
-// SAVE TO LOCAL STORAGE
+// SAVE HAPPY MEMORY
+// ==========================================
+
+memoryForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        // Make sure the calendar event date
+        // is used for the memory as well.
+        const memoryDate =
+            itemDate.value ||
+            formatDate(new Date());
+
+
+        const newMemory = {
+
+            id:
+                Date.now(),
+
+            text:
+                memoryText.value.trim(),
+
+            date:
+                memoryDate
+        };
+
+
+        // Add memory
+        memories.push(newMemory);
+
+
+        // Save memory
+        saveMemories();
+
+
+        // Clear only the memory input
+        memoryText.value = "";
+
+
+        // Refresh calendar
+        renderCalendar();
+    }
+);
+
+
+// ==========================================
+// SAVE CALENDAR ITEMS
 // ==========================================
 
 function saveItems() {
@@ -421,6 +649,19 @@ function saveItems() {
     localStorage.setItem(
         "calendarItems",
         JSON.stringify(items)
+    );
+}
+
+
+// ==========================================
+// SAVE HAPPY MEMORIES
+// ==========================================
+
+function saveMemories() {
+
+    localStorage.setItem(
+        "happyMemories",
+        JSON.stringify(memories)
     );
 }
 
@@ -435,11 +676,14 @@ previousMonth.addEventListener(
 
         currentMonth--;
 
+
         if (currentMonth < 0) {
 
             currentMonth = 11;
+
             currentYear--;
         }
+
 
         renderCalendar();
     }
@@ -456,11 +700,14 @@ nextMonth.addEventListener(
 
         currentMonth++;
 
+
         if (currentMonth > 11) {
 
             currentMonth = 0;
+
             currentYear++;
         }
+
 
         renderCalendar();
     }
@@ -469,7 +716,7 @@ nextMonth.addEventListener(
 
 // ==========================================
 // SECURITY
-// Prevent HTML being inserted into calendar
+// Prevent HTML being inserted
 // ==========================================
 
 function escapeHTML(text) {
@@ -477,7 +724,8 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+    div.textContent =
+        text;
 
     return div.innerHTML;
 }
