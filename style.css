@@ -10,8 +10,8 @@
 
 body {
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: #ffc2199c;
-    color: #000000;
+    background: #ff9a6c;
+    color: #3b1830;
     min-height: 100vh;
 }
 
@@ -49,8 +49,8 @@ body {
 
 .add-btn {
     border: none;
-    background: #ff8400;
-    color: white;
+    background: #f05a47;
+    color: #fff7ed;
 
     padding: 13px 20px;
 
@@ -63,11 +63,11 @@ body {
 
     transition: 0.2s ease;
 
-    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.25);
+    box-shadow: 0 5px 15px rgba(217, 72, 95, 0.25);
 }
 
 .add-btn:hover {
-    background: #4585dd;
+    background: #d94672;
     transform: translateY(-2px);
 }
 
@@ -106,10 +106,10 @@ body {
     width: 42px;
     height: 42px;
 
-    border: 1px solid #88ff00;
+    border: 1px solid #e85d75;
 
-    background: #be61d866;
-    color: #f9fafb;
+    background: #c85a8e;
+    color: #fff7ed;
 
     border-radius: 10px;
 
@@ -121,8 +121,8 @@ body {
 }
 
 .nav-btn:hover {
-    background: #8bb8ff;
-    border-color: #4f46e5;
+    background: #a94f8c;
+    border-color: #8b3d72;
 }
 
 
@@ -131,16 +131,16 @@ body {
 ========================================= */
 
 .calendar {
-    background: #93c4382b;
+    background: #ffd1b8;
 
-    border: 1px solid #374151;
+    border: 1px solid #e85d75;
 
     border-radius: 14px;
 
     overflow: hidden;
 
     box-shadow:
-        0 20px 40px rgba(255, 99, 99, 0.25);
+        0 20px 40px rgba(126, 44, 77, 0.25);
 }
 
 
@@ -152,9 +152,9 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
-    background: #ffe396;
+    background: #8b3d72;
 
-    border-bottom: 1px solid #c6ffad;
+    border-bottom: 1px solid #e85d75;
 }
 
 .weekdays div {
@@ -162,7 +162,7 @@ body {
 
     text-align: center;
 
-    color: #bcfff2;
+    color: #ffe4d6;
 
     font-size: 13px;
 
@@ -192,10 +192,10 @@ body {
 
     padding: 10px;
 
-    background: #9ba5fd;
+    background: #ffc7ab;
 
-    border-right: 1px solid #e7acfb;
-    border-bottom: 1px solid #f7b2e6;
+    border-right: 1px solid #e98b8b;
+    border-bottom: 1px solid #e98b8b;
 
     position: relative;
 
@@ -205,7 +205,7 @@ body {
 }
 
 .day:hover {
-    background: #78dabb;
+    background: #f5a6a6;
 }
 
 
@@ -231,7 +231,7 @@ body {
 
     margin-bottom: 8px;
 
-    color: #fcfcfc;
+    color: #4a2035;
 
     font-size: 14px;
 
@@ -242,13 +242,13 @@ body {
 /* Previous/Next Month */
 
 .other-month {
-    background: #e63e9d64;
+    background: #e89aa9;
 
-    color: #39c6d35b;
+    color: #9b526b;
 }
 
 .other-month .day-number {
-    color: #77baee;
+    color: #a85d70;
 }
 
 
@@ -257,5 +257,5 @@ body {
 ========================================= */
 
 .today {
-    background :rgb(233, 9, 233)
+    background: #e87582;
 }
