@@ -11,7 +11,7 @@
 body {
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
     background: #03f0f0;
-    color: #f9fafb;
+    color: #c6c6c6;
     min-height: 100vh;
 }
 
@@ -106,9 +106,9 @@ body {
     width: 42px;
     height: 42px;
 
-    border: 1px solid #374151;
+    border: 1px solid #88ff00;
 
-    background: #1f2937;
+    background: #c800ff;
     color: #f9fafb;
 
     border-radius: 10px;
@@ -121,7 +121,7 @@ body {
 }
 
 .nav-btn:hover {
-    background: #374151;
+    background: #8bb8ff;
     border-color: #4f46e5;
 }
 
@@ -131,7 +131,7 @@ body {
 ========================================= */
 
 .calendar {
-    background: #1f2937;
+    background: #507804;
 
     border: 1px solid #374151;
 
@@ -140,7 +140,7 @@ body {
     overflow: hidden;
 
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.25);
+        0 20px 40px rgba(255, 99, 99, 0.25);
 }
 
 
@@ -152,9 +152,9 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
-    background: #252f3f;
+    background: #ffe396;
 
-    border-bottom: 1px solid #374151;
+    border-bottom: 1px solid #c6ffad;
 }
 
 .weekdays div {
@@ -162,7 +162,7 @@ body {
 
     text-align: center;
 
-    color: #9ca3af;
+    color: #bcfff2;
 
     font-size: 13px;
 
@@ -192,10 +192,10 @@ body {
 
     padding: 10px;
 
-    background: #1f2937;
+    background: #9ba5fd;
 
-    border-right: 1px solid #374151;
-    border-bottom: 1px solid #374151;
+    border-right: 1px solid #e7acfb;
+    border-bottom: 1px solid #f7b2e6;
 
     position: relative;
 
@@ -205,7 +205,7 @@ body {
 }
 
 .day:hover {
-    background: #263244;
+    background: #004831;
 }
 
 
@@ -231,7 +231,7 @@ body {
 
     margin-bottom: 8px;
 
-    color: #d1d5db;
+    color: #fcfcfc;
 
     font-size: 14px;
 
