@@ -10,7 +10,7 @@
 
 body {
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: #111827;
+    background: #03f0f0;
     color: #f9fafb;
     min-height: 100vh;
 }
@@ -49,7 +49,7 @@ body {
 
 .add-btn {
     border: none;
-    background: #6366f1;
+    background: #ff8400;
     color: white;
 
     padding: 13px 20px;
@@ -63,11 +63,11 @@ body {
 
     transition: 0.2s ease;
 
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.25);
 }
 
 .add-btn:hover {
-    background: #818cf8;
+    background: #752704;
     transform: translateY(-2px);
 }
 
